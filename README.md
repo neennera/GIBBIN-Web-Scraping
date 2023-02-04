@@ -5,7 +5,6 @@ Web scraping by Python.
 - HTML
 - CSS
 - JavaScript
+- googel clound API
 
 # Function
-- light/dark mode
-- click-to-copy function
