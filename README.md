@@ -6,6 +6,16 @@ Web scraping by Python.
 - CSS
 - JavaScript
 - google clound API
+- library
+    - Selenium
+    - html.parser
+    - datetime
+    - googleapiclient
+    - pickle
+    - os
+    - apiclient
+    - google_auth_oauthlib
+    - google.oauth2.service_account
 
 # Function
 
