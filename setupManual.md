@@ -14,6 +14,7 @@ VM ubanto 20.04 setup
 - cd source
 - wget "https://drive.google.com/uc?export=download&id=1tEWrEkrIWmbzPnB3gHrA42xFcnFd_C5n" -O "token.pkl"
 - pip3 install --upgrade requests
+- cd
 
 [หากต้องการ update : pip install --upgrade ****]
 
@@ -58,3 +59,12 @@ Pin: origin "deb.debian.org"
 Pin-Priority: 700
 EOF
 """
+
+8. ลง Script จาก "/script" ใน "source"
+- cd source
+- sudo nano ...
+    - sudo nano main.py
+    - sudo nano privateData.py
+    - sudo nano analysisData.py
+    - sudo nano analysisLecture.py
+    - sudo nano googleCalendarFunc.py
