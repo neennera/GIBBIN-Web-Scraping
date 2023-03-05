@@ -1,6 +1,6 @@
 import privateData
 import pickle
-from apiclient.discovery import build
+from googleapiclient.discovery import apiclient, gflags, httplib2, oauth2client, uritemplate
 from datetime import datetime, timedelta
 
 # # setup google calendar

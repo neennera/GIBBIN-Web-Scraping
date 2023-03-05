@@ -24,7 +24,7 @@ def getTime(dayInWeek, start, end):
 
 def analyseLecture(exampleOfLecture) :
   lectureData = []
-  for dayInWeek in range(0,7):
+  for dayInWeek in range(2,7):
     temp = exampleOfLecture[dayInWeek].copy()
     i=0
     while i< len(temp): 

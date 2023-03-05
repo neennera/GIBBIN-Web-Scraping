@@ -7,14 +7,19 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 # Open Chrome
 options = Options()
 options.add_argument("--no-sandbox")
+options.add_argument("--headless")
 options.headless = True
 
-driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+#driver = webdriver.Chrome("/usr/bin/chromium", options=options)
+#driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
 
 driver.get(privateData.destination)
 print(driver.title)
@@ -35,7 +40,7 @@ timetable_page = driver.find_element('xpath',privateData.Xpath_of_timetable_butt
 
 # define searching & scraping function
 def searching(classroom) :
-  driver.get(privateData.timetable_page)
+  driver.get(timetable_page)
   driver.find_element('xpath',privateData.Xpath_of_search_box).clear()
   driver.find_element('xpath',privateData.Xpath_of_search_box).send_keys(classroom)
   driver.find_element('xpath',privateData.Xpath_of_search_submit_button).submit()
@@ -62,9 +67,11 @@ def GIBBIN()  :
       googleCalendarFunc.add_event_to_calendar(CALENDAR_ID,item.subject, item.start, item.end)
     print("DONE "+classroom)
 
-try :
-  GIBBIN()
-except :
-  print("GIBBIN error")
-  driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
-  driver.get(privateData.destination)
+GIBBIN()
+
+# try :
+#   GIBBIN()
+# except :
+#   print("GIBBIN error")
+#   driver = webdriver.Chrome("/usr/bin/chromium", options=options)
+#   driver.get(privateData.destination)
