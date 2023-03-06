@@ -66,3 +66,11 @@ EOF
     - sudo nano analysisData.py
     - sudo nano analysisLecture.py
     - sudo nano googleCalendarFunc.py
+
+## 9. ตั้ง task เพื่อ เปิดและปิด VM อัตโนมัติ
+follows : https://learn.microsoft.com/en-us/shows/it-ops-talk/auto-shutdown-and-auto-start-an-azure-vm
+
+## 10. เขียน scrupt ให้รันไฟล์ main.py อัตโนมัตื
+follows : https://www.youtube.com/watch?v=Gl9HS7-H0mI
+sudo crontab -e
+add : @reboot python3 /home/GIBBIN/source/main.py &

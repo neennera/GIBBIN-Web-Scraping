@@ -17,7 +17,10 @@ options.add_argument("--no-sandbox")
 options.add_argument("--headless")
 options.headless = True
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+try :
+  driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
+except :
+  driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
 #driver = webdriver.Chrome("/usr/bin/chromium", options=options)
 #driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
 
@@ -67,11 +70,29 @@ def GIBBIN()  :
       googleCalendarFunc.add_event_to_calendar(CALENDAR_ID,item.subject, item.start, item.end)
     print("DONE "+classroom)
 
-GIBBIN()
+attempts = 0
+success = False
+while attempts < 4 and not success:
+    try:
+        GIBBIN()
+        success = True
+    except:
+        attempts += 1
+        if attempts == 4:
+            break
 
-# try :
-#   GIBBIN()
-# except :
-#   print("GIBBIN error")
-#   driver = webdriver.Chrome("/usr/bin/chromium", options=options)
-#   driver.get(privateData.destination)
+        try :
+          driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
+        except :
+          driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
+        
+        driver.get(privateData.destination)
+
+        username_input = driver.find_element("xpath",privateData.X_path_login_username)
+        username_input.send_keys(privateData.gibbon_username)
+
+        password_input = driver.find_element("xpath",privateData.X_path_login_password)
+        password_input.send_keys(privateData.gibbon_password)
+
+        login_box = driver.find_element("xpath",privateData.X_path_login_submitButton)
+        login_box.submit()

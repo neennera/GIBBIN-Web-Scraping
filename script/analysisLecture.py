@@ -24,7 +24,7 @@ def getTime(dayInWeek, start, end):
 
 def analyseLecture(exampleOfLecture) :
   lectureData = []
-  for dayInWeek in range(2,7):
+  for dayInWeek in range(0,7):
     temp = exampleOfLecture[dayInWeek].copy()
     i=0
     while i< len(temp): 
@@ -34,6 +34,7 @@ def analyseLecture(exampleOfLecture) :
       # School Close
       if temp[i] == "School Closed":
         lectureData.append(lecture(dayInWeek, "08:00" , "16:00", "School Closed"))
+        i=i+1
         continue
       
       # M6 Elective subject (7XX)
