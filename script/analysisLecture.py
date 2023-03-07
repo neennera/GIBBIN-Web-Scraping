@@ -33,7 +33,8 @@ def analyseLecture(exampleOfLecture) :
       
       # School Close
       if temp[i] == "School Closed":
-        lectureData.append(lecture(dayInWeek, "08:00" , "16:00", "School Closed"))
+        startTime, endTime = getTime(dayInWeek, "08:00", "16:00")
+        lectureData.append(lecture(dayInWeek, startTime,endTime, "School Closed"))
         i=i+1
         continue
       
