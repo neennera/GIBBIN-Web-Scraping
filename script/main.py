@@ -96,3 +96,12 @@ while attempts < 4 and not success:
 
         login_box = driver.find_element("xpath",privateData.X_path_login_submitButton)
         login_box.submit()
+
+if attempts == 4 :
+  f = open("log.txt", "a")
+  f.write("failed " + (datetime.utcnow()+timedelta(hours=7)).strftime('%Y-%m-%dT%H:%M:%S'))
+  f.close()
+else :
+  f = open("log.txt", "a")
+  f.write("suscessed " + (datetime.utcnow()+timedelta(hours=7)).strftime('%Y-%m-%dT%H:%M:%S'))
+  f.close()

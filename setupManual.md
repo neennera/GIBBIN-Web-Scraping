@@ -71,6 +71,87 @@ EOF
 follows : https://learn.microsoft.com/en-us/shows/it-ops-talk/auto-shutdown-and-auto-start-an-azure-vm
 
 ## 10. เขียน scrupt ให้รันไฟล์ main.py อัตโนมัตื
-follows : https://www.youtube.com/watch?v=Gl9HS7-H0mI
+(not woeking)follows : https://www.youtube.com/watch?v=Gl9HS7-H0mI
 sudo crontab -e
-add : @reboot python3 /home/GIBBIN/source/main.py &
+add : ``` @reboot python3 /home/GIBBIN/source/main.py & ```
+
+
+
+
+follow : https://stackoverflow.com/questions/24518522/run-python-script-at-startup-in-ubuntu
+* sudo cp -i /home/GIBBIN/test.py /bin
+* sudo crontab -e
+``` @reboot python /bin/test.py & ```
+(path python หาไม่เจอ)
+``` @reboot /usr/bin/python3 /bin/test.py & ```
+``` 30 15 * * *  /usr/bin/python3 /bin/test.py & ```
+
+
+## 11. สร้าง service
+
+### 11.1 สร้าง .sh ไฟล์
+
+follows : https://www.youtube.com/watch?v=Qx0ga0Iz9CE
+using bash script
+* สร้างไฟล์ test.py ไว้เทสว่าทำงานปกติไหม
+* sudo nano startup-script-bash.sh
+```
+#!/bin/bash
+
+python3 "/home/GIBBIN/test.py"
+```
+* bash /home/GIBBIN/startup-script-bash.sh
+
+### 11.2 ทำ service
+follows : https://linuxhint.com/use-etc-rc-local-boot/ & https://askubuntu.com/questions/1241397/ubuntu-20-04-service-autostart
+
+* sudo nano /etc/systemd/system/gibbinService.service
+
+# Ap1 
+```
+[Unit]
+Description= GIBBIN
+
+[Service]
+ExecStart=/bin/bash /home/GIBBIN/startup-script-bash.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+* sudo systemctl enable gibbinService.service
+* sudo systemctl start gibbinService
+* sudo systemctl status gibbinService
+
+# Ap2
+```
+[Unit]
+Description=GIBBIN
+
+[Service]
+ExecStart=/bin/bash -c 'python3 /home/GIBBIN/test.py'
+
+[Install]
+WantedBy=multi-user.target
+```
+
+sudo nano /etc/systemd/system/gibbinService
+sudo systemctl enable gibbinService.service
+sudo systemctl start gibbinService
+sudo systemctl status gibbinService
+
+# Apv3
+* sudo nano ~/.config/autostart/MyScript.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Name=MyScript
+Comment=MyScript
+Icon=gnome-info
+Exec=python3 /home/GIBBIN/test.py
+Terminal=false
+Type=Application
+Categories=
+
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=0
+

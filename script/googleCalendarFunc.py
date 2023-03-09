@@ -11,14 +11,14 @@ from datetime import datetime, timedelta
 # credentials = flow.run_console()
 # pickle.dump(credentials, open("token.pkl", "wb"))
 
-credentials = pickle.load(open("token.pkl", "rb"))
+credentials = pickle.load(open("/home/GIBBIN/source/token.pkl", "rb"))
 service = build("calendar", "v3", credentials=credentials)
 
 def add_event_to_calendar(CALENDAR_ID, event_summary, event_start_time, event_end_time):
     # Event details
     event = {
       'summary': event_summary,
-      'description': "updated : "+ str(datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')),
+      'description': "updated : "+ (str(datetime.utcnow()+ timedelta(hours=7)).strftime('%Y-%m-%dT%H:%M:%S')),
       'start': {
         'dateTime': event_start_time.strftime('%Y-%m-%dT%H:%M:%S'),
         'timeZone': 'Asia/Bangkok',
