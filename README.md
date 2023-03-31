@@ -18,6 +18,9 @@ Web scraping by Python.
     - google.oauth2.service_account
 
 # Function
+- Scraping data from 'ESC-GIBBON' website
+- Analysis data
+- Add event to google calendar
 
 # Google clound API setup
 For who want to create their own calendar. you can follow these step.
